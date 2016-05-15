@@ -1,0 +1,11 @@
+ <% if @games.any? %>
+  Your Games
+
+  <% @games.each do %>
+    <%= @game.title %>
+  <% end %>
+<% else %>
+  Start your first game!
+<% end %>
+
+<%= link_to 'New Game', new_game_path, class: 'button' %>

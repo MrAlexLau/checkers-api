@@ -1,0 +1,12 @@
+<h2>New Game</h2>
+<%- if @game.errors.any? %>
+  <%- @game.errors.messages.each do |field, message| %>
+    <%= message %>
+  <%- end %>
+<%- end %>
+
+<%= form_for(@game) do %>
+  <%= label_tag(:opponent, "Opponent:") %>
+  <%= text_field_tag :opponent, @opponent_email %>
+  <%= submit_tag("Start") %>
+<% end %>

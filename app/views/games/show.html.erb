@@ -1,0 +1,9 @@
+<h2>Details for Game <%= @game.id %></h2>
+
+<h4>Players:</h4>
+<ul>
+  <%- @game.players.each do |player| %>
+    <li><%= player.username %></li>
+  <%- end %>
+</ul>
+
