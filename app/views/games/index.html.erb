@@ -1,8 +1,8 @@
  <% if @games.any? %>
   Your Games
 
-  <% @games.each do %>
-    <%= @game.title %>
+  <% @games.each do |game| %>
+    <%= game.title %>
   <% end %>
 <% else %>
   Start your first game!
