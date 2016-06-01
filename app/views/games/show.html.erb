@@ -1,9 +1,18 @@
-<h2>Details for Game <%= @game.id %></h2>
+<div class="show-game">
+  <h2>Details for Game <%= @game.id %></h2>
 
-<h4>Players:</h4>
-<ul>
-  <%- @game.players.each do |player| %>
-    <li><%= player.username %></li>
+  <h4>Players:</h4>
+  <ul>
+    <%- @game.players.each do |player| %>
+      <li><%= player.username %></li>
+    <%- end %>
+  </ul>
+
+  <%- GamePresenter.new(@game).rows.each do |row| %>
+    <%= content_tag :ul, class: row.css_class do %>
+      <%- row.squares.each do |square| %>
+        <%= content_tag :div, '', class: square.css_class %>
+      <%- end %>
+    <%- end %>
   <%- end %>
-</ul>
-
+</div>

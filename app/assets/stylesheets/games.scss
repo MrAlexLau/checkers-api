@@ -1,3 +1,58 @@
-// Place all the styles related to the games controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.show-game {
+  $dark-square-color: #2e2e1f; // dark brown
+  $light-square-color: #d6d6c2; // cream color
+  $dark-checker-color: #009933; // green
+  $light-checker-color: red;
+
+  .game-row-even,
+  .game-row-odd {
+    -webkit-margin-before: 0;
+-webkit-margin-after: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .game-row-even {
+    .square:nth-child(even) {
+      background-color: $dark-square-color;
+    }
+    .square:nth-child(odd) {
+      background-color: $light-square-color;
+    }
+  }
+
+  .game-row-odd {
+    .square:nth-child(even) {
+      background-color: $light-square-color;
+    }
+    .square:nth-child(odd) {
+      background-color: $dark-square-color;
+    }
+  }
+
+  .square {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+    }
+  }
+
+  .square.red::after {
+    border: 25px solid $dark-checker-color;
+  }
+
+  .square.black::after {
+    border: 25px solid $light-checker-color;
+  }
+}

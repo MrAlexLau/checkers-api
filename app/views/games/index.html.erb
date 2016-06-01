@@ -1,9 +1,11 @@
  <% if @games.any? %>
   Your Games
 
-  <% @games.each do |game| %>
-    <%= game.title %>
-  <% end %>
+  <ul>
+    <% @games.each do |game| %>
+      <li><%= link_to game.title, game %></li>
+    <% end %>
+  </ul>
 <% else %>
   Start your first game!
 <% end %>
