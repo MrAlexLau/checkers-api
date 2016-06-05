@@ -7,7 +7,6 @@ class Game < ActiveRecord::Base
 
   alias_method :players, :users
 
-  # TODO: update this to include user names as well
   def title
     "Game #{self.id}: " + players.map { |p| p.username }.join(" vs ")
   end
@@ -27,8 +26,8 @@ class Game < ActiveRecord::Base
 
   def default_state
     # zero represents a blank space
-    # one represents a dark checker
-    # two represents a light checker
+    # one represents a light checker (red)
+    # two represents a dark checker (black)
     [
       [0, 1, 0, 1, 0, 1, 0, 1],
       [1, 0, 1, 0, 1, 0, 1, 0],

@@ -80,10 +80,10 @@
   }
 
   .square.red::after {
-    border: 25px solid $dark-checker-color;
+    border: 25px solid $light-checker-color;
   }
 
   .square.black::after {
-    border: 25px solid $light-checker-color;
+    border: 25px solid $dark-checker-color;
   }
 }
