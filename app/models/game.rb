@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   validates :users, :length => {:minimum => 2, :message=>"Invalid players" }
 
   ROW_INDICES = ('A'..'H').to_a.freeze
-  COLUMN_INDICES = (1..8)
+  COLUMN_INDICES = (1..8).to_a.freeze
 
   alias_method :players, :users
 
