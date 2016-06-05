@@ -19,6 +19,22 @@ class GamePresenter
     result
   end
 
+  def header_row
+    new_row = OpenStruct.new({
+      css_class: 'header-row',
+      squares: []
+    })
+
+    Game::COLUMN_INDICES.each do |col_index|
+      new_row.squares << OpenStruct.new({
+        value: col_index,
+        css_class: 'legend-square square'
+      })
+    end
+
+    new_row
+  end
+
   private
 
   def get_squares(row)
@@ -27,6 +43,7 @@ class GamePresenter
     row.map do |square|
       new_square = OpenStruct.new()
       new_square.css_class = "square #{square}"
+      new_square.value = ""
 
       result << new_square
     end

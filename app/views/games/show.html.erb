@@ -8,10 +8,21 @@
     <%- end %>
   </ul>
 
-  <%- GamePresenter.new(@game).rows.each do |row| %>
-    <%= content_tag :ul, class: row.css_class do %>
-      <%- row.squares.each do |square| %>
-        <%= content_tag :div, '', class: square.css_class %>
+  <%= content_tag :ul, class: @presenter.header_row.css_class do %>
+    <%- @presenter.header_row.squares.each do |square| %>
+      <%= content_tag :div, square.value, class: square.css_class %>
+    <%- end %>
+  <%- end %>
+
+  <%- @presenter.rows.each_with_index do |row, row_index| %>
+    <%= content_tag :div, class: 'row-including-legend' do %>
+      <%= content_tag :div, class: 'y-axis-legend-square legend-square square' do %>
+        <%= Game::ROW_INDICES[row_index] %>
+      <%- end %>
+      <%= content_tag :ul, class: row.css_class do %>
+        <%- row.squares.each do |square| %>
+          <%= content_tag :div, square.value, class: square.css_class %>
+        <%- end %>
       <%- end %>
     <%- end %>
   <%- end %>

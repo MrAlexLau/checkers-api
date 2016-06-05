@@ -1,13 +1,44 @@
+@import 'global';
+
 .show-game {
   $dark-square-color: #2e2e1f; // dark brown
   $light-square-color: #d6d6c2; // cream color
   $dark-checker-color: #009933; // green
   $light-checker-color: red;
+  $square-height: 50px;
+  $square-width: 50px;
+  $legend-gutter: $base-line-height / 2;
+
+  .header-row {
+    margin-bottom: $legend-gutter;
+    margin-left: $square-width + ($legend-gutter) + 2; // 2px for the border offset
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .legend-square {
+    font-size: $base-font-size * 1.5;
+    line-height: $square-height;
+    text-align: center;
+  }
+
+  .row-including-legend {
+    @include clearfix;
+  }
+
+  .y-axis-legend-square.legend-square {
+    float: left;
+    height: $square-height;
+    padding: 0;
+    width: $square-width;
+    margin-right: $legend-gutter;
+  }
 
   .game-row-even,
   .game-row-odd {
+    -webkit-margin-after: 0;
     -webkit-margin-before: 0;
--webkit-margin-after: 0;
+    float: left;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -38,8 +69,8 @@
     padding: 0;
     border: 1px solid black;
     display: inline-block;
-    height: 50px;
-    width: 50px;
+    height: $square-height;
+    width: $square-width;
 
     &::after {
       content: '';
