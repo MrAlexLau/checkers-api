@@ -1,10 +1,10 @@
 @import 'global';
 
 .show-game {
-  $dark-square-color: #2e2e1f; // dark brown
+  $dark-square-color: #797979; // gray
   $light-square-color: #d6d6c2; // cream color
-  $dark-checker-color: #009933; // green
-  $light-checker-color: red;
+  $dark-checker-color: #363636; // dark gray
+  $light-checker-color: #DE3737; // red
   $square-height: 50px;
   $square-width: 50px;
   $legend-gutter: $base-line-height / 2;
@@ -44,20 +44,30 @@
     padding: 0;
   }
 
+  @mixin selectable-checker {
+    &.selected-for-move {
+      background-color: #FAFA07; // yellow
+    }
+  }
+
   .game-row-even {
     .square:nth-child(even) {
+      @include selectable-checker;
       background-color: $dark-square-color;
     }
     .square:nth-child(odd) {
+      @include selectable-checker;
       background-color: $light-square-color;
     }
   }
 
   .game-row-odd {
     .square:nth-child(even) {
+      @include selectable-checker;
       background-color: $light-square-color;
     }
     .square:nth-child(odd) {
+      @include selectable-checker;
       background-color: $dark-square-color;
     }
   }
@@ -85,5 +95,20 @@
 
   .square.black::after {
     border: 25px solid $dark-checker-color;
+  }
+
+  .current-players-checker {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  // TODO: refactor this to only be for selectable squares
+  .game-board.with-checker-selected {
+    .square {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

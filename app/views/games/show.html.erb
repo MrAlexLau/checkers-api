@@ -8,22 +8,36 @@
     <%- end %>
   </ul>
 
-  <%= content_tag :ul, class: @presenter.header_row.css_class do %>
-    <%- @presenter.header_row.squares.each do |square| %>
-      <%= content_tag :div, square.value, class: square.css_class %>
-    <%- end %>
-  <%- end %>
+  <%= form_for @game, url: { action: "submit_move" }, html: { method: "POST" } do %>
+    <%= hidden_field_tag(:start_position) %>
+    <%= hidden_field_tag(:end_position) %>
+  <% end %>
 
-  <%- @presenter.rows.each_with_index do |row, row_index| %>
-    <%= content_tag :div, class: 'row-including-legend' do %>
-      <%= content_tag :div, class: 'y-axis-legend-square legend-square square' do %>
-        <%= Game::ROW_INDICES[row_index] %>
+  <div class="game-board" data-id="<%= @game.id %>">
+    <%= content_tag :ul, class: @presenter.header_row.css do %>
+      <%- @presenter.header_row.squares.each do |square| %>
+        <%= content_tag :div, square.value, class: square.css %>
       <%- end %>
-      <%= content_tag :ul, class: row.css_class do %>
-        <%- row.squares.each do |square| %>
-          <%= content_tag :div, square.value, class: square.css_class %>
+    <%- end %>
+
+    <%- @presenter.rows.each_with_index do |row, row_index| %>
+      <%= content_tag :div, class: 'row-including-legend' do %>
+        <%= content_tag :div, class: 'y-axis-legend-square legend-square square' do %>
+          <%= Game::ROW_INDICES[row_index] %>
+        <%- end %>
+        <%= content_tag :ul, class: row.css do %>
+          <%- row.squares.each_with_index do |square, col_index| %>
+            <%= content_tag :div,
+              square.value,
+              class: square.css,
+              data: {
+                column: Game::COLUMN_INDICES[col_index],
+                row: Game::ROW_INDICES[row_index],
+              }
+            %>
+          <%- end %>
         <%- end %>
       <%- end %>
     <%- end %>
-  <%- end %>
+  </div>
 </div>

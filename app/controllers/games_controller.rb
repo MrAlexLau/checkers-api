@@ -7,7 +7,8 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @presenter = GamePresenter.new(@game)
+    @player_context = PlayerContext.new(current_user, @game)
+    @presenter = GamePresenter.new(@game, @player_context)
   end
 
   def new
@@ -20,6 +21,7 @@ class GamesController < ApplicationController
     @opponent = User.find_by(email: @opponent_email)
 
     @game = Game.new
+    @game.setup
     @game.users << current_user
     @game.users << @opponent if @opponent
 
@@ -29,4 +31,15 @@ class GamesController < ApplicationController
       render action: 'new'
     end
   end
+
+  def submit_move
+    @game = Game.find(params[:id])
+    moved = @game.submit_move!(params[:start_position], params[:end_position], current_user)
+
+    # save_move if moved #TODO: implement this
+    Rails.logger.debug params.inspect
+
+    redirect_to @game
+  end
+
 end
